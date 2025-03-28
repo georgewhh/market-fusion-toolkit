@@ -142,7 +142,7 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
               activeDot={{ r: 6, strokeWidth: 2 }}
             >
               {cycleData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={levelColor(entry.level)} />
+                <Cell key={`cell-${index}`} fill={`url(#colorLevel${entry.level})`} />
               ))}
             </Area>
           </AreaChart>
