@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Line, Area, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -15,45 +14,65 @@ const generateIndexData = () => {
     return date.toISOString().slice(5, 10);
   });
   
-  return dates.map((date, i) => {
-    // Generate a somewhat realistic pattern with support around 3150 and resistance around 3350
+  const dataPoints: any[] = [];
+  
+  for (let i = 0; i < dates.length; i++) {
     let price = basePrice;
     
     if (i < 20) {
-      // First section: downtrend
       price = basePrice - (20 - i) * 3 + Math.random() * 30 - 15;
     } else if (i < 40) {
-      // Middle section: bottoming pattern
       price = basePrice - 60 + (i - 20) * 4 + Math.random() * 40 - 20;
     } else {
-      // Last section: choppy recovery
       price = basePrice - 20 + Math.sin(i * 0.3) * 50 + Math.random() * 30 - 15;
     }
     
-    // Calculate some technical indicators
-    const ma5 = i >= 4 ? (price + generateIndexData()[i-1]?.price + generateIndexData()[i-2]?.price + 
-                          generateIndexData()[i-3]?.price + generateIndexData()[i-4]?.price) / 5 : price;
-    const ma20 = i >= 19 ? Array.from({length: 20}, (_, j) => generateIndexData()[i-j]?.price).reduce((a, b) => a + b, 0) / 20 : price;
+    dataPoints.push({
+      date: dates[i],
+      price,
+      volume: Math.random() * 1000 + 500
+    });
+  }
+  
+  for (let i = 0; i < dataPoints.length; i++) {
+    const ma5 = i >= 4 
+      ? (dataPoints[i].price + dataPoints[i-1].price + dataPoints[i-2].price + 
+         dataPoints[i-3].price + dataPoints[i-4].price) / 5 
+      : dataPoints[i].price;
+      
+    let ma20 = dataPoints[i].price;
+    if (i >= 19) {
+      let sum = 0;
+      for (let j = 0; j < 20; j++) {
+        sum += dataPoints[i-j].price;
+      }
+      ma20 = sum / 20;
+    }
+    
     const ma60 = basePrice; // Simplified for demo
     
-    // MACD components (simplified)
-    const ema12 = price * 0.15 + (i > 0 ? generateIndexData()[i-1]?.ema12 * 0.85 : price);
-    const ema26 = price * 0.08 + (i > 0 ? generateIndexData()[i-1]?.ema26 * 0.92 : price);
+    const ema12 = i > 0 
+      ? dataPoints[i].price * 0.15 + dataPoints[i-1].ema12 * 0.85 
+      : dataPoints[i].price;
+      
+    const ema26 = i > 0 
+      ? dataPoints[i].price * 0.08 + dataPoints[i-1].ema26 * 0.92 
+      : dataPoints[i].price;
+      
     const macdLine = ema12 - ema26;
-    const signalLine = i > 0 ? generateIndexData()[i-1]?.signalLine * 0.8 + macdLine * 0.2 : 0;
+    const signalLine = i > 0 
+      ? dataPoints[i-1].signalLine * 0.8 + macdLine * 0.2 
+      : 0;
     const histogram = macdLine - signalLine;
     
-    // RSI (simplified)
     const rsi = 40 + Math.sin(i * 0.2) * 20 + Math.random() * 10;
     
-    // Bollinger Bands
     const stdDev = 25 + Math.sin(i * 0.1) * 10;
     const upperBand = ma20 + stdDev * 2;
     const lowerBand = ma20 - stdDev * 2;
     
-    return {
-      date,
-      price,
+    dataPoints[i] = {
+      ...dataPoints[i],
       ma5,
       ma20,
       ma60,
@@ -64,13 +83,13 @@ const generateIndexData = () => {
       histogram,
       rsi,
       upperBand,
-      lowerBand,
-      volume: Math.random() * 1000 + 500
+      lowerBand
     };
-  });
+  }
+  
+  return dataPoints;
 };
 
-// Only call once to maintain data consistency
 const technicalData = generateIndexData();
 
 const TechnicalAnalysisCard: React.FC<TechnicalAnalysisCardProps> = ({ className }) => {
