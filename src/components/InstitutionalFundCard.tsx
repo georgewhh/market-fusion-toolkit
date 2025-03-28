@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Bar, Line, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
+import { Line, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import TimelineSlider from './TimelineSlider';
 
 interface InstitutionalFundCardProps {
@@ -19,30 +19,33 @@ const generateFundData = () => {
     const netBuy = Math.random() * 200 - 100; // Range from -100 to 100
     return {
       date,
-      netBuy,
-      tradingRatio: Math.random() * 30 + 10, // Range from 10% to 40%
+      netBuy
     };
   });
 };
 
 const fundData = generateFundData();
 
+const keyInsights = [
+  {
+    title: "深海经济退潮",
+    description: "亚星锚链遭6025万巨额卖出，若振华重工等中船系个股未能企稳，可能引发板块连锁抛售。"
+  },
+  {
+    title: "工业母机资金切换",
+    description: "合锻智能单日抛压1.1亿，量化资金撤离工业母机板块，需警惕华中数控等跟跌风险。"
+  },
+  {
+    title: "周期股分歧加剧",
+    description: "中毅达3日累计卖出2783万，磷矿石价格回落导致业绩预期下修，化肥板块承压。"
+  }
+];
+
 const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className }) => {
   const [timeRange, setTimeRange] = useState<[number, number]>([
     Math.max(0, fundData.length - 20), 
     fundData.length - 1
   ]);
-  
-  const [visibleSeries, setVisibleSeries] = useState({
-    tradingRatio: true
-  });
-  
-  const toggleSeries = (series: keyof typeof visibleSeries) => {
-    setVisibleSeries(prev => ({
-      ...prev,
-      [series]: !prev[series]
-    }));
-  };
   
   const visibleData = fundData.slice(timeRange[0], timeRange[1] + 1);
   
@@ -54,11 +57,6 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
           <p className="text-xs" style={{ color: payload[0].value >= 0 ? '#D83C3C' : '#0F9948' }}>
             机构净买入: {payload[0].value.toFixed(2)}亿
           </p>
-          {payload[1] && visibleSeries.tradingRatio && (
-            <p className="text-xs text-market-yellow">
-              机构成交占比: {payload[1].value.toFixed(2)}%
-            </p>
-          )}
         </div>
       );
     }
@@ -68,6 +66,15 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
   return (
     <div className={`dashboard-card ${className}`}>
       <h3 className="card-title">龙虎榜资金分析</h3>
+      
+      <div className="space-y-2 mb-4">
+        {keyInsights.map((insight, index) => (
+          <div key={index} className="text-sm">
+            <div className="text-white font-medium">{insight.title}</div>
+            <p className="text-xs text-gray-300">{insight.description}</p>
+          </div>
+        ))}
+      </div>
       
       <div className="h-60">
         <ResponsiveContainer width="100%" height="100%">
@@ -80,50 +87,21 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
               tickLine={{ stroke: '#2A2C3C' }}
             />
             <YAxis 
-              yAxisId="left"
               tick={{ fontSize: 10, fill: '#9CA3AF' }}
               axisLine={{ stroke: '#2A2C3C' }}
               tickLine={{ stroke: '#2A2C3C' }}
               domain={[-100, 100]}
             />
-            <YAxis 
-              yAxisId="right"
-              orientation="right"
-              tick={{ fontSize: 10, fill: '#9CA3AF' }}
-              axisLine={{ stroke: '#2A2C3C' }}
-              tickLine={{ stroke: '#2A2C3C' }}
-              domain={[0, 40]}
-            />
             <Tooltip content={<CustomTooltip />} />
-            <Legend 
-              onClick={(e) => {
-                if (e.dataKey === 'tradingRatio') {
-                  toggleSeries(e.dataKey as keyof typeof visibleSeries);
-                }
-              }}
-            />
-            <Bar 
-              yAxisId="left" 
+            <Legend />
+            <Line 
+              type="monotone" 
               dataKey="netBuy" 
               name="机构净买入" 
-              fill="#8884d8" // Set a default fill color
-              barSize={20} 
-            >
-              {visibleData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.netBuy >= 0 ? "#D83C3C" : "#0F9948"} />
-              ))}
-            </Bar>
-            {visibleSeries.tradingRatio && (
-              <Line 
-                yAxisId="right" 
-                type="monotone" 
-                dataKey="tradingRatio" 
-                name="机构成交占比" 
-                stroke="#F0BE83" 
-                strokeWidth={2} 
-                dot={{ r: 3 }} 
-              />
-            )}
+              stroke="#8884d8" 
+              dot={{ r: 3 }}
+              activeDot={{ r: 6 }}
+            />
           </ComposedChart>
         </ResponsiveContainer>
       </div>
