@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Bar, Line, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { Bar, Line, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 import TimelineSlider from './TimelineSlider';
 
 interface InstitutionalFundCardProps {
@@ -113,9 +113,14 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
               yAxisId="left" 
               dataKey="netBuy" 
               name="机构净买入" 
-              fill={(data) => data.netBuy >= 0 ? "#D83C3C" : "#0F9948"} 
+              fill="#8884d8" // Set a default fill color
               barSize={20} 
-            />
+            >
+              {/* Use Cell components to color each bar based on its value */}
+              {visibleData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.netBuy >= 0 ? "#D83C3C" : "#0F9948"} />
+              ))}
+            </Bar>
             {visibleSeries.tradingRatio && (
               <Line 
                 yAxisId="right" 
