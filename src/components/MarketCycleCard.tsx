@@ -26,8 +26,8 @@ const cycleData = [
 
 const levelColor = (level: number) => {
   switch(level) {
-    case 1: return '#3A5E8C'; // 冰点 - 深蓝
-    case 2: return '#3F7DFC'; // 退潮 - 蓝色
+    case 1: return '#0F9948'; // 冰点 - 绿色
+    case 2: return '#88C786'; // 退潮 - 浅绿色
     case 3: return '#F0BE83'; // 混沌 - 黄色
     case 4: return '#F08C72'; // 启动 - 橙色
     case 5: return '#E05858'; // 发酵 - 红色
@@ -59,14 +59,14 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
     return null;
   };
 
-  // Define color bands for the background
+  // Define color bands for the background - now from green to red
   const colorBands = [
-    { y1: 0, y2: 1, color: '#3A5E8C', label: '冰点' },  // 冰点
-    { y1: 1, y2: 2, color: '#3F7DFC', label: '退潮' },  // 退潮
-    { y1: 2, y2: 3, color: '#F0BE83', label: '混沌' },  // 混沌
-    { y1: 3, y2: 4, color: '#F08C72', label: '启动' },  // 启动
-    { y1: 4, y2: 5, color: '#E05858', label: '发酵' },  // 发酵
-    { y1: 5, y2: 6, color: '#D83C3C', label: '高潮' },  // 高潮
+    { y1: 0, y2: 1, color: '#0F9948', label: '冰点' },  // 冰点 - 绿色
+    { y1: 1, y2: 2, color: '#88C786', label: '退潮' },  // 退潮 - 浅绿色
+    { y1: 2, y2: 3, color: '#F0BE83', label: '混沌' },  // 混沌 - 黄色
+    { y1: 3, y2: 4, color: '#F08C72', label: '启动' },  // 启动 - 橙色
+    { y1: 4, y2: 5, color: '#E05858', label: '发酵' },  // 发酵 - 红色
+    { y1: 5, y2: 6, color: '#D83C3C', label: '高潮' },  // 高潮 - 暗红
   ];
 
   return (
@@ -88,7 +88,7 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
           {colorBands.map((band, index) => (
             <div 
               key={index} 
-              className="flex items-center justify-end px-2"
+              className="flex items-center px-2"
               style={{ 
                 backgroundColor: `${band.color}20`, 
                 height: `${(100 / colorBands.length)}%`,
@@ -124,18 +124,6 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
               tickLine={false}
               tick={{ fontSize: 10, fill: '#9CA3AF' }}
               tickFormatter={() => ''}
-            />
-            <YAxis 
-              orientation="right"
-              domain={[1, 6]} 
-              ticks={[1, 2, 3, 4, 5, 6]} 
-              axisLine={false}
-              tickLine={false}
-              tick={{ fontSize: 10, fill: '#9CA3AF' }}
-              tickFormatter={(value) => {
-                const labels = ['冰点', '退潮', '混沌', '启动', '发酵', '高潮'];
-                return labels[value - 1];
-              }}
             />
             <Tooltip content={<CustomTooltip />} />
             <Area 
