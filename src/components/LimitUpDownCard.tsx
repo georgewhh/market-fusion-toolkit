@@ -59,11 +59,16 @@ const LimitUpDownCard: React.FC<LimitUpDownCardProps> = ({ className }) => {
   
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
+      const limitUpValue = payload[0].value;
+      const limitDownValue = payload[1].value;
+      const ratio = limitDownValue > 0 ? (limitUpValue / limitDownValue).toFixed(2) : '∞';
+      
       return (
         <div className="bg-market-card p-3 border border-market-border rounded shadow-lg">
           <p className="text-sm font-semibold mb-1">{label}</p>
-          <p className="text-xs text-market-red">涨停: {payload[0].value}</p>
-          <p className="text-xs text-market-green">跌停: {payload[1].value}</p>
+          <p className="text-xs text-market-red">涨停: {limitUpValue}</p>
+          <p className="text-xs text-market-green">跌停: {limitDownValue}</p>
+          <p className="text-xs text-white mt-1">比值: {ratio}</p>
         </div>
       );
     }
