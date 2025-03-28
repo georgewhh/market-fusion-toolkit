@@ -83,14 +83,14 @@ const TimelineSlider: React.FC<TimelineSliderProps> = ({
   }, [dragging, localValue]);
 
   return (
-    <div className={cn("relative w-full h-10 py-4", className)}>
+    <div className={cn("relative w-full h-8 py-3", className)}>
       <div 
         ref={sliderRef}
-        className="w-full h-1 bg-gray-700 rounded-full"
+        className="w-full h-0.5 bg-gray-700 rounded-full"
       >
         <div
           ref={rangeRef}
-          className="absolute h-1 bg-blue-500 rounded-full"
+          className="absolute h-0.5 bg-blue-500 rounded-full cursor-pointer"
           style={{
             left: `${getPercentage(localValue[0])}%`,
             width: `${getPercentage(localValue[1]) - getPercentage(localValue[0])}%`
@@ -99,18 +99,18 @@ const TimelineSlider: React.FC<TimelineSliderProps> = ({
         />
         <div 
           ref={startHandleRef}
-          className="absolute w-4 h-4 bg-white rounded-full shadow-md -mt-1.5 -ml-2 cursor-ew-resize"
+          className="absolute w-3 h-3 bg-white rounded-full shadow-md -mt-1 -ml-1.5 cursor-ew-resize hover:scale-110 transition-transform"
           style={{ left: `${getPercentage(localValue[0])}%` }}
           onMouseDown={(e) => handleMouseDown(e, 'start')}
         />
         <div 
           ref={endHandleRef}
-          className="absolute w-4 h-4 bg-white rounded-full shadow-md -mt-1.5 -ml-2 cursor-ew-resize"
+          className="absolute w-3 h-3 bg-white rounded-full shadow-md -mt-1 -ml-1.5 cursor-ew-resize hover:scale-110 transition-transform"
           style={{ left: `${getPercentage(localValue[1])}%` }}
           onMouseDown={(e) => handleMouseDown(e, 'end')}
         />
       </div>
-      <div className="flex justify-between mt-2 text-xs text-gray-400">
+      <div className="flex justify-between mt-1 text-xs text-gray-400">
         <span>{formatLabel(localValue[0])}</span>
         <span>{formatLabel(localValue[1])}</span>
       </div>

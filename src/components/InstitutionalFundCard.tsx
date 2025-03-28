@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { ComposedChart, Bar, Cell, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import TimelineSlider from './TimelineSlider';
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface InstitutionalFundCardProps {
   className?: string;
@@ -62,19 +63,42 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
     }
     return null;
   };
+  
+  const CustomLegend = ({ payload }: any) => {
+    if (!payload) return null;
+    
+    return (
+      <div className="flex items-center justify-center gap-4 mt-1">
+        <div className="flex items-center gap-1.5">
+          <div className="w-2 h-2 rounded-sm bg-market-red"></div>
+          <span className="text-xs text-gray-300">净买入(正值)</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="w-2 h-2 rounded-sm bg-market-green"></div>
+          <span className="text-xs text-gray-300">净卖出(负值)</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="w-2 h-2 rounded-sm bg-[#8884d8]"></div>
+          <span className="text-xs text-gray-300">趋势线</span>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className={`dashboard-card ${className}`}>
       <h3 className="card-title">龙虎榜资金分析</h3>
       
-      <div className="space-y-2 mb-4">
-        {keyInsights.map((insight, index) => (
-          <div key={index} className="text-sm">
-            <div className="text-white font-medium">{insight.title}</div>
-            <p className="text-xs text-gray-300">{insight.description}</p>
-          </div>
-        ))}
-      </div>
+      <ScrollArea className="h-[85px] mb-4 pr-2">
+        <div className="space-y-2">
+          {keyInsights.map((insight, index) => (
+            <div key={index} className="text-sm">
+              <div className="text-white font-medium">{insight.title}</div>
+              <p className="text-xs text-gray-300">{insight.description}</p>
+            </div>
+          ))}
+        </div>
+      </ScrollArea>
       
       <div className="h-60">
         <ResponsiveContainer width="100%" height="100%">
@@ -93,7 +117,7 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
               domain={[-100, 100]}
             />
             <Tooltip content={<CustomTooltip />} />
-            <Legend />
+            <Legend content={<CustomLegend />} />
             <Bar 
               dataKey="netBuy" 
               name="机构净买入" 
@@ -108,8 +132,8 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
               dataKey="netBuy" 
               name="机构净买入" 
               stroke="#8884d8" 
-              dot={{ r: 3 }}
-              activeDot={{ r: 6 }}
+              dot={{ r: 2 }}
+              activeDot={{ r: 5 }}
             />
           </ComposedChart>
         </ResponsiveContainer>

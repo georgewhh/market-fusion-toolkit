@@ -107,8 +107,8 @@ const LimitUpDownCard: React.FC<LimitUpDownCardProps> = ({ className }) => {
               name="涨停数" 
               stroke="#D83C3C" 
               strokeWidth={2}
-              dot={{ r: 3 }}
-              activeDot={{ r: 6 }}
+              dot={{ r: 2 }}
+              activeDot={{ r: 5 }}
             />
             <Line 
               type="monotone" 
@@ -116,8 +116,8 @@ const LimitUpDownCard: React.FC<LimitUpDownCardProps> = ({ className }) => {
               name="跌停数" 
               stroke="#0F9948" 
               strokeWidth={2}
-              dot={{ r: 3 }}
-              activeDot={{ r: 6 }}
+              dot={{ r: 2 }}
+              activeDot={{ r: 5 }}
             />
           </ComposedChart>
         </ResponsiveContainer>
