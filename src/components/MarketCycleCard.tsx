@@ -6,6 +6,7 @@ interface MarketCycleCardProps {
   className?: string;
 }
 
+// Updated cycle data to match the correct scale (1=冰点, 6=高潮)
 const cycleData = [
   { date: '2023-03-01', level: 1, status: '冰点' },
   { date: '2023-03-15', level: 2, status: '退潮' },
@@ -59,14 +60,14 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
     return null;
   };
 
-  // Define color bands for the background - from green to red, now in corrected order
+  // Define color bands for the background - from green to red (bottom to top)
   const colorBands = [
-    { level: 6, color: '#D83C3C', label: '高潮' },  // 高潮 - 暗红
-    { level: 5, color: '#E05858', label: '发酵' },  // 发酵 - 红色
-    { level: 4, color: '#F08C72', label: '启动' },  // 启动 - 橙色
-    { level: 3, color: '#F0BE83', label: '混沌' },  // 混沌 - 黄色
-    { level: 2, color: '#88C786', label: '退潮' },  // 退潮 - 浅绿色
     { level: 1, color: '#0F9948', label: '冰点' },  // 冰点 - 绿色
+    { level: 2, color: '#88C786', label: '退潮' },  // 退潮 - 浅绿色
+    { level: 3, color: '#F0BE83', label: '混沌' },  // 混沌 - 黄色
+    { level: 4, color: '#F08C72', label: '启动' },  // 启动 - 橙色
+    { level: 5, color: '#E05858', label: '发酵' },  // 发酵 - 红色
+    { level: 6, color: '#D83C3C', label: '高潮' },  // 高潮 - 暗红
   ];
 
   return (
@@ -83,8 +84,8 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
       </div>
       
       <div className="h-40 relative">
-        {/* Background color bands - corrected order with highest at top */}
-        <div className="absolute inset-0 flex flex-col">
+        {/* Background color bands - from bottom to top */}
+        <div className="absolute inset-0 flex flex-col-reverse">
           {colorBands.map((band, index) => (
             <div 
               key={index} 
@@ -92,7 +93,7 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
               style={{ 
                 backgroundColor: `${band.color}20`, 
                 height: `${(100 / colorBands.length)}%`,
-                borderBottom: index < colorBands.length - 1 ? '1px dashed rgba(255,255,255,0.2)' : 'none'
+                borderTop: index > 0 ? '1px dashed rgba(255,255,255,0.2)' : 'none'
               }}
             >
               <span className="text-xs text-white opacity-80">{band.label}</span>
@@ -104,8 +105,6 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
           <AreaChart 
             data={cycleData} 
             margin={{ top: 5, right: 20, left: 5, bottom: 5 }}
-            // Invert the Y-axis to match the corrected order
-            reverseStackOrder
           >
             <defs>
               {[1, 2, 3, 4, 5, 6].map((level) => (
@@ -128,7 +127,6 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
               axisLine={false}
               tickLine={false}
               tick={false}
-              reversed={true} // Reverse the Y-axis so 6 is at top and 1 is at bottom
             />
             <Tooltip content={<CustomTooltip />} />
             <Area 
