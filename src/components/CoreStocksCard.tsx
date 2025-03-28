@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface CoreStocksCardProps {
   className?: string;
@@ -104,31 +105,33 @@ const coreStocksData = [
 
 const CoreStocksCard: React.FC<CoreStocksCardProps> = ({ className }) => {
   return (
-    <div className={`dashboard-card ${className} overflow-auto max-h-[400px]`}>
+    <div className={`dashboard-card ${className}`}>
       <h3 className="card-title">核心个股</h3>
       
-      <div className="space-y-3">
-        {coreStocksData[0].stocks.map((stock, stockIndex) => (
-          <div key={stockIndex} className="pl-2 border-l-2 border-gray-700">
-            <div className="flex justify-between items-center">
-              <h5 className="text-gray-200">{stock.name}</h5>
-              <span className="positive-value">{stock.change}</span>
-            </div>
-            
-            <div className="mt-1 pl-2 space-y-1.5">
-              {stock.details.map((detail, detailIndex) => (
-                <div key={detailIndex} className="grid grid-cols-12 gap-1 text-xs">
-                  <div className="col-span-3 text-gray-300">{detail.company}</div>
-                  <div className="col-span-2 positive-value">{detail.change}</div>
-                  <div className="col-span-7 text-gray-400 truncate" title={detail.description}>
-                    {detail.description}
+      <ScrollArea className="h-[340px] pr-2">
+        <div className="space-y-3">
+          {coreStocksData[0].stocks.map((stock, stockIndex) => (
+            <div key={stockIndex} className="pl-2 border-l-2 border-gray-700">
+              <div className="flex justify-between items-center">
+                <h5 className="text-gray-200">{stock.name}</h5>
+                <span className="positive-value">{stock.change}</span>
+              </div>
+              
+              <div className="mt-1 pl-2 space-y-1.5">
+                {stock.details.map((detail, detailIndex) => (
+                  <div key={detailIndex} className="grid grid-cols-12 gap-1 text-xs">
+                    <div className="col-span-3 text-gray-300">{detail.company}</div>
+                    <div className="col-span-2 positive-value">{detail.change}</div>
+                    <div className="col-span-7 text-gray-400 truncate" title={detail.description}>
+                      {detail.description}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </ScrollArea>
     </div>
   );
 };

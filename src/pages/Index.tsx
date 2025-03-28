@@ -17,16 +17,14 @@ const Index = () => {
     <div className="min-h-screen bg-market-background text-white p-4 md:p-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* First row - Primary insights */}
-        <MarketCycleCard className="md:col-span-1" />
-        <CoreStocksCard className="md:col-span-1" />
-        
-        {/* Second row - Secondary insights */}
+        <MarketCycleCard className="lg:col-span-1" />
+        <CoreStocksCard className="lg:col-span-1" />
         <SentimentCard className="lg:col-span-1" />
         
-        {/* Third row - Tertiary insights */}
-        <LimitUpDownCard className="md:col-span-1" />
-        <InstitutionalFundCard className="md:col-span-1" />
-        <TechnicalAnalysisCard className="md:col-span-1" />
+        {/* Second and Third row */}
+        <LimitUpDownCard className="lg:col-span-1" />
+        <InstitutionalFundCard className="lg:col-span-1" />
+        <TechnicalAnalysisCard className="lg:col-span-1" />
       </div>
     </div>
   );

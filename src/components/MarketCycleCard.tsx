@@ -123,6 +123,15 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
               axisLine={false}
               tickLine={false}
               tick={{ fontSize: 10, fill: '#9CA3AF' }}
+              tickFormatter={() => ''}
+            />
+            <YAxis 
+              orientation="right"
+              domain={[1, 6]} 
+              ticks={[1, 2, 3, 4, 5, 6]} 
+              axisLine={false}
+              tickLine={false}
+              tick={{ fontSize: 10, fill: '#9CA3AF' }}
               tickFormatter={(value) => {
                 const labels = ['冰点', '退潮', '混沌', '启动', '发酵', '高潮'];
                 return labels[value - 1];
