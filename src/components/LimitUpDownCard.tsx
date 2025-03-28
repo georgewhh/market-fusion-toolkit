@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Line, ComposedChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { Line, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import TimelineSlider from './TimelineSlider';
 
 interface LimitUpDownCardProps {
@@ -42,8 +42,7 @@ const generateHistoricalData = () => {
     return {
       date,
       limitUp,
-      limitDown,
-      ratio: +(limitUp / Math.max(1, limitDown)).toFixed(2)
+      limitDown
     };
   });
 };
@@ -65,7 +64,6 @@ const LimitUpDownCard: React.FC<LimitUpDownCardProps> = ({ className }) => {
           <p className="text-sm font-semibold mb-1">{label}</p>
           <p className="text-xs text-market-red">涨停: {payload[0].value}</p>
           <p className="text-xs text-market-green">跌停: {payload[1].value}</p>
-          <p className="text-xs text-market-yellow">比率: {payload[2].value}</p>
         </div>
       );
     }
@@ -96,25 +94,31 @@ const LimitUpDownCard: React.FC<LimitUpDownCardProps> = ({ className }) => {
               tickLine={{ stroke: '#2A2C3C' }}
             />
             <YAxis 
-              yAxisId="left"
               tick={{ fontSize: 10, fill: '#9CA3AF' }}
               axisLine={{ stroke: '#2A2C3C' }}
               tickLine={{ stroke: '#2A2C3C' }}
               domain={[0, 'dataMax']}
             />
-            <YAxis 
-              yAxisId="right"
-              orientation="right"
-              tick={{ fontSize: 10, fill: '#9CA3AF' }}
-              axisLine={{ stroke: '#2A2C3C' }}
-              tickLine={{ stroke: '#2A2C3C' }}
-              domain={[0, 40]}
-            />
             <Tooltip content={<CustomTooltip />} />
             <Legend />
-            <Bar yAxisId="left" dataKey="limitUp" name="涨停数" fill="#D83C3C" barSize={20} />
-            <Bar yAxisId="left" dataKey="limitDown" name="跌停数" fill="#0F9948" barSize={20} />
-            <Line yAxisId="right" type="monotone" dataKey="ratio" name="涨跌停比" stroke="#F0BE83" strokeWidth={2} dot={{ r: 3 }} />
+            <Line 
+              type="monotone" 
+              dataKey="limitUp" 
+              name="涨停数" 
+              stroke="#D83C3C" 
+              strokeWidth={2}
+              dot={{ r: 3 }}
+              activeDot={{ r: 6 }}
+            />
+            <Line 
+              type="monotone" 
+              dataKey="limitDown" 
+              name="跌停数" 
+              stroke="#0F9948" 
+              strokeWidth={2}
+              dot={{ r: 3 }}
+              activeDot={{ r: 6 }}
+            />
           </ComposedChart>
         </ResponsiveContainer>
       </div>

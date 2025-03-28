@@ -22,11 +22,11 @@ const Index = () => {
         
         {/* Second row - Secondary insights */}
         <SentimentCard className="lg:col-span-1" />
-        <LimitUpDownCard className="md:col-span-1 lg:col-span-1" />
         
         {/* Third row - Tertiary insights */}
-        <InstitutionalFundCard className="md:col-span-1 lg:col-span-1" />
-        <TechnicalAnalysisCard className="md:col-span-1 lg:col-span-2" />
+        <LimitUpDownCard className="md:col-span-1" />
+        <InstitutionalFundCard className="md:col-span-1" />
+        <TechnicalAnalysisCard className="md:col-span-1" />
       </div>
     </div>
   );

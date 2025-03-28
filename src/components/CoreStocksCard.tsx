@@ -8,9 +8,46 @@ interface CoreStocksCardProps {
 
 const coreStocksData = [
   {
-    sector: '算力五大巨头',
-    change: '+12.53%',
+    sector: '宇宙',
+    change: '+15.64%',
     stocks: [
+      {
+        name: '字节',
+        change: '+15.28%',
+        details: [
+          {
+            company: '光环新网',
+            change: '+19.98%',
+            description: '字节为公司第一大客户，营收占比64.19% (2021年)'
+          },
+          {
+            company: '润渤科技',
+            change: '+20.00%',
+            description: '字节为公司第一大客户，营收占比60%，数据中心运营'
+          }
+        ]
+      },
+      {
+        name: '百度',
+        change: '+15.28%',
+        details: [
+          {
+            company: '浪潮信息',
+            change: '+6.93%',
+            description: '字节为公司第一大客户，营收占比22.31% (2023年)'
+          },
+          {
+            company: '奥飞数据',
+            change: '+19.98%',
+            description: '百度为公司第一大客户，营收占比22.71% (2023年)'
+          },
+          {
+            company: '亚康股份',
+            change: '+10.58%',
+            description: '百度为公司第四大客户，营收占比4.50% (2023年数据)'
+          }
+        ]
+      },
       {
         name: '阿里',
         change: '+12.51%',
@@ -61,49 +98,6 @@ const coreStocksData = [
             company: '科华数据',
             change: '+10.00%',
             description: '腾讯数据中心核心供应商'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    sector: '宇宙',
-    change: '+15.64%',
-    stocks: [
-      {
-        name: '字节',
-        change: '+15.28%',
-        details: [
-          {
-            company: '光环新网',
-            change: '+19.98%',
-            description: '字节为公司第一大客户，营收占比64.19% (2021年)'
-          },
-          {
-            company: '润渤科技',
-            change: '+20.00%',
-            description: '字节为公司第一大客户，营收占比60%，数据中心运营'
-          }
-        ]
-      },
-      {
-        name: '百度',
-        change: '+15.28%',
-        details: [
-          {
-            company: '浪潮信息',
-            change: '+6.93%',
-            description: '字节为公司第一大客户，营收占比22.31% (2023年)'
-          },
-          {
-            company: '奥飞数据',
-            change: '+19.98%',
-            description: '百度为公司第一大客户，营收占比22.71% (2023年)'
-          },
-          {
-            company: '亚康股份',
-            change: '+10.58%',
-            description: '百度为公司第四大客户，营收占比4.50% (2023年数据)'
           }
         ]
       }

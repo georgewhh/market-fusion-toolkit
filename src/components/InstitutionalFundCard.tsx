@@ -21,7 +21,6 @@ const generateFundData = () => {
       date,
       netBuy,
       tradingRatio: Math.random() * 30 + 10, // Range from 10% to 40%
-      turnoverRatio: Math.random() * 20 + 5, // Range from 5% to 25%
     };
   });
 };
@@ -35,8 +34,7 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
   ]);
   
   const [visibleSeries, setVisibleSeries] = useState({
-    tradingRatio: true,
-    turnoverRatio: true
+    tradingRatio: true
   });
   
   const toggleSeries = (series: keyof typeof visibleSeries) => {
@@ -59,11 +57,6 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
           {payload[1] && visibleSeries.tradingRatio && (
             <p className="text-xs text-market-yellow">
               机构成交占比: {payload[1].value.toFixed(2)}%
-            </p>
-          )}
-          {payload[2] && visibleSeries.turnoverRatio && (
-            <p className="text-xs text-blue-400">
-              换手率: {payload[2].value.toFixed(2)}%
             </p>
           )}
         </div>
@@ -104,7 +97,7 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
             <Tooltip content={<CustomTooltip />} />
             <Legend 
               onClick={(e) => {
-                if (e.dataKey === 'tradingRatio' || e.dataKey === 'turnoverRatio') {
+                if (e.dataKey === 'tradingRatio') {
                   toggleSeries(e.dataKey as keyof typeof visibleSeries);
                 }
               }}
@@ -116,7 +109,6 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
               fill="#8884d8" // Set a default fill color
               barSize={20} 
             >
-              {/* Use Cell components to color each bar based on its value */}
               {visibleData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.netBuy >= 0 ? "#D83C3C" : "#0F9948"} />
               ))}
@@ -128,17 +120,6 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
                 dataKey="tradingRatio" 
                 name="机构成交占比" 
                 stroke="#F0BE83" 
-                strokeWidth={2} 
-                dot={{ r: 3 }} 
-              />
-            )}
-            {visibleSeries.turnoverRatio && (
-              <Line 
-                yAxisId="right" 
-                type="monotone" 
-                dataKey="turnoverRatio" 
-                name="换手率" 
-                stroke="#3F7DFC" 
                 strokeWidth={2} 
                 dot={{ r: 3 }} 
               />

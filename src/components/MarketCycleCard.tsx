@@ -92,6 +92,7 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
             />
             <YAxis 
               domain={[1, 6]} 
+              ticks={[1, 2, 3, 4, 5, 6]}
               axisLine={false}
               tickLine={false}
               tick={{ fontSize: 10, fill: '#9CA3AF' }}
@@ -108,7 +109,7 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
               fill={`url(#colorLevel3)`}
               fillOpacity={1}
               strokeWidth={2}
-              dot={{ r: 4, strokeWidth: 1 }}
+              dot={{ r: 4, strokeWidth: 1, fill: (entry) => levelColor(entry.level) }}
               activeDot={{ r: 6, strokeWidth: 2 }}
             />
           </AreaChart>

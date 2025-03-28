@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Line, Area, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -132,7 +133,7 @@ const TechnicalAnalysisCard: React.FC<TechnicalAnalysisCardProps> = ({ className
             </ul>
           </div>
           
-          <div className="h-60">
+          <div className="h-52">
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart data={technicalData.slice(-30)} margin={{ top: 5, right: 20, left: 5, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#2A2C3C" />
@@ -166,7 +167,7 @@ const TechnicalAnalysisCard: React.FC<TechnicalAnalysisCardProps> = ({ className
             </div>
           </div>
           
-          <div className="h-60">
+          <div className="h-52">
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart data={technicalData.slice(-30)} margin={{ top: 5, right: 20, left: 5, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#2A2C3C" />
@@ -213,7 +214,7 @@ const TechnicalAnalysisCard: React.FC<TechnicalAnalysisCardProps> = ({ className
             </div>
           </div>
           
-          <div className="h-60">
+          <div className="h-52">
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart data={technicalData.slice(-30)} margin={{ top: 5, right: 20, left: 5, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#2A2C3C" />
