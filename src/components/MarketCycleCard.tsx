@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
+import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis, Tooltip, Cell } from 'recharts';
 
 interface MarketCycleCardProps {
   className?: string;
@@ -59,6 +59,16 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
     return null;
   };
 
+  // Define color bands for the background
+  const colorBands = [
+    { y1: 0, y2: 1, color: '#3A5E8C', label: '冰点' },  // 冰点
+    { y1: 1, y2: 2, color: '#3F7DFC', label: '退潮' },  // 退潮
+    { y1: 2, y2: 3, color: '#F0BE83', label: '混沌' },  // 混沌
+    { y1: 3, y2: 4, color: '#F08C72', label: '启动' },  // 启动
+    { y1: 4, y2: 5, color: '#E05858', label: '发酵' },  // 发酵
+    { y1: 5, y2: 6, color: '#D83C3C', label: '高潮' },  // 高潮
+  ];
+
   return (
     <div className={`dashboard-card ${className}`}>
       <h3 className="card-title">情绪周期</h3>
@@ -72,9 +82,26 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
         </ul>
       </div>
       
-      <div className="h-40">
+      <div className="h-40 relative">
+        {/* Background color bands */}
+        <div className="absolute inset-0 flex flex-col">
+          {colorBands.map((band, index) => (
+            <div 
+              key={index} 
+              className="flex items-center justify-end px-2"
+              style={{ 
+                backgroundColor: `${band.color}20`, 
+                height: `${(100 / colorBands.length)}%`,
+                borderBottom: index < colorBands.length - 1 ? '1px dashed rgba(255,255,255,0.2)' : 'none'
+              }}
+            >
+              <span className="text-xs text-white opacity-80">{band.label}</span>
+            </div>
+          ))}
+        </div>
+        
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={cycleData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
+          <AreaChart data={cycleData} margin={{ top: 5, right: 20, left: 5, bottom: 5 }}>
             <defs>
               {[1, 2, 3, 4, 5, 6].map((level) => (
                 <linearGradient key={level} id={`colorLevel${level}`} x1="0" y1="0" x2="0" y2="1">
@@ -92,7 +119,7 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
             />
             <YAxis 
               domain={[1, 6]} 
-              ticks={[1, 2, 3, 4, 5, 6]}
+              ticks={[1, 2, 3, 4, 5, 6]} 
               axisLine={false}
               tickLine={false}
               tick={{ fontSize: 10, fill: '#9CA3AF' }}
@@ -109,9 +136,13 @@ const MarketCycleCard: React.FC<MarketCycleCardProps> = ({ className }) => {
               fill={`url(#colorLevel3)`}
               fillOpacity={1}
               strokeWidth={2}
-              dot={{ r: 4, strokeWidth: 1, fill: (entry) => levelColor(entry.level) }}
+              dot={{ r: 4, strokeWidth: 1 }}
               activeDot={{ r: 6, strokeWidth: 2 }}
-            />
+            >
+              {cycleData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={levelColor(entry.level)} />
+              ))}
+            </Area>
           </AreaChart>
         </ResponsiveContainer>
       </div>
