@@ -18,9 +18,11 @@ const generateFundData = () => {
   
   return dates.map((date) => {
     const netBuy = Math.random() * 200 - 100; // Range from -100 to 100
+    const transactionPercentage = Math.random() * 20; // Range from 0 to 20%
     return {
       date,
-      netBuy
+      netBuy,
+      transactionPercentage
     };
   });
 };
@@ -58,6 +60,9 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
           <p className="text-xs" style={{ color: payload[0].value >= 0 ? '#D83C3C' : '#0F9948' }}>
             机构净买入: {payload[0].value.toFixed(2)}亿
           </p>
+          <p className="text-xs text-blue-400">
+            机构成交占比: {payload[1].value.toFixed(2)}%
+          </p>
         </div>
       );
     }
@@ -78,8 +83,8 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
           <span className="text-xs text-gray-300">净卖出(负值)</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <div className="w-2 h-2 rounded-sm bg-[#8884d8]"></div>
-          <span className="text-xs text-gray-300">趋势线</span>
+          <div className="w-2 h-2 rounded-sm bg-blue-400"></div>
+          <span className="text-xs text-gray-300">成交占比</span>
         </div>
       </div>
     );
@@ -111,14 +116,25 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
               tickLine={{ stroke: '#2A2C3C' }}
             />
             <YAxis 
+              yAxisId="left"
               tick={{ fontSize: 10, fill: '#9CA3AF' }}
               axisLine={{ stroke: '#2A2C3C' }}
               tickLine={{ stroke: '#2A2C3C' }}
               domain={[-100, 100]}
             />
+            <YAxis 
+              yAxisId="right"
+              orientation="right"
+              tick={{ fontSize: 10, fill: '#9CA3AF' }}
+              axisLine={{ stroke: '#2A2C3C' }}
+              tickLine={{ stroke: '#2A2C3C' }}
+              domain={[0, 20]}
+              tickFormatter={(value) => `${value}%`}
+            />
             <Tooltip content={<CustomTooltip />} />
             <Legend content={<CustomLegend />} />
             <Bar 
+              yAxisId="left"
               dataKey="netBuy" 
               name="机构净买入" 
               barSize={20}
@@ -128,10 +144,11 @@ const InstitutionalFundCard: React.FC<InstitutionalFundCardProps> = ({ className
               ))}
             </Bar>
             <Line 
+              yAxisId="right"
               type="monotone" 
-              dataKey="netBuy" 
-              name="机构净买入" 
-              stroke="#8884d8" 
+              dataKey="transactionPercentage" 
+              name="机构成交占比" 
+              stroke="#60A5FA" 
               dot={{ r: 2 }}
               activeDot={{ r: 5 }}
             />
