@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -40,3 +41,33 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Additional CSS from the design spec */
+a {
+  color: var(--hx-brand-color-3);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--hx-brand-color-hover);
+}
+
+a:active {
+  color: var(--hx-brand-color-active);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--hx-text-color-primary);
+}
+
+p {
+  color: var(--hx-text-color-secondary);
+}
+
+.text-primary { color: var(--hx-text-color-primary); }
+.text-secondary { color: var(--hx-text-color-secondary); }
+.text-tertiary { color: var(--hx-text-color-tertiary); }
+
+.bg-page { background-color: var(--hx-bg-color-page); }
+.bg-container { background-color: var(--hx-bg-color-container); }

@@ -5,6 +5,221 @@
 
 @layer base {
   :root {
+    /* 基础色板 - blue（蓝色）*/
+    --blue-color-1: #E3F4FF;
+    --blue-color-2: #C0E6FD;
+    --blue-color-3: #80CAFF;
+    --blue-color-4: #47B3FF;
+    --blue-color-5: #19A0FF;
+    --blue-color-6: #0076D1;
+    --blue-color-7: #004E96;
+    --blue-color-8: #002C5C;
+    --blue-color-9: #001A3D;
+    --blue-color-10: #00112B;
+
+    /* cyan（天青色）*/
+    --cyan-color-1: #C1F4F7;
+    --cyan-color-2: #92F1F7;
+    --cyan-color-3: #5CDFE8;
+    --cyan-color-4: #2FD5E0;
+    --cyan-color-5: #00CAD9;
+    --cyan-color-6: #00A4B2;
+    --cyan-color-7: #006878;
+    --cyan-color-8: #00414D;
+    --cyan-color-9: #002B33;
+    --cyan-color-10: #002029;
+
+    /* green（绿色）*/
+    --green-color-1: #D7FAE1;
+    --green-color-2: #9EF0B4;
+    --green-color-3: #6FE08D;
+    --green-color-4: #41CC65;
+    --green-color-5: #10B246;
+    --green-color-6: #1E8A3A;
+    --green-color-7: #15612A;
+    --green-color-8: #0E451C;
+    --green-color-9: #083316;
+    --green-color-10: #00260D;
+
+    /* red（红色）*/
+    --red-color-1: #FFD1D1;
+    --red-color-2: #FFA3A3;
+    --red-color-3: #FF7575;
+    --red-color-4: #FF5959;
+    --red-color-5: #FF2929;
+    --red-color-6: #D90000;
+    --red-color-7: #990000;
+    --red-color-8: #660000;
+    --red-color-9: #420000;
+    --red-color-10: #260000;
+
+    /* yellow（黄色）*/
+    --yellow-color-1: #FFF0CC;
+    --yellow-color-2: #FFE299;
+    --yellow-color-3: #FFD466;
+    --yellow-color-4: #FFC430;
+    --yellow-color-5: #FFB300;
+    --yellow-color-6: #E09600;
+    --yellow-color-7: #A66300;
+    --yellow-color-8: #734500;
+    --yellow-color-9: #422800;
+    --yellow-color-10: #291800;
+    
+    /* 黑色（black）和白色（white）*/
+    --black: #000000;
+    --white: #FFFFFF;
+    
+    /* 基础品牌色映射 */
+    --hx-brand-color-1: var(--blue-color-4);   
+    --hx-brand-color-2: var(--blue-color-5);
+    --hx-brand-color-3: var(--blue-color-6);
+    --hx-brand-color-4: var(--blue-color-7);
+    --hx-brand-color-5: var(--blue-color-8);
+    --hx-brand-color-6: var(--blue-color-9);
+
+    /* 次要品牌色映射 */
+    --hx-sec-brand-color-1: var(--red-color-4);
+    --hx-sec-brand-color-2: var(--red-color-5);
+    --hx-sec-brand-color-3: var(--red-color-6);
+    --hx-sec-brand-color-4: var(--red-color-7);
+    --hx-sec-brand-color-5: var(--red-color-8);
+    --hx-sec-brand-color-6: var(--red-color-9);
+
+    /* 灰色映射 */
+    --hx-gray-color-1: var(--white);
+    --hx-gray-color-2: #F2F2F2;
+    --hx-gray-color-3: #BFBFBF;
+    --hx-gray-color-4: #828282;
+    --hx-gray-color-5: #646464;
+    --hx-gray-color-6: #484848;
+    --hx-gray-color-7: #323232;
+    --hx-gray-color-8: #222222;
+    --hx-gray-color-9: #161616;
+    --hx-gray-color-10: #0F0F0F;
+    --hx-gray-color-11: var(--black);
+
+    /* 功能色映射 */
+    --hx-success-color-1: var(--cyan-color-4);
+    --hx-success-color-2: var(--cyan-color-5);
+    --hx-success-color-3: var(--cyan-color-6);
+    --hx-success-color-4: var(--cyan-color-7);
+    --hx-success-color-5: var(--cyan-color-8);
+
+    --hx-warning-color-1: var(--yellow-color-4);
+    --hx-warning-color-2: var(--yellow-color-5);
+    --hx-warning-color-3: var(--yellow-color-6);
+    --hx-warning-color-4: var(--yellow-color-7);
+    --hx-warning-color-5: var(--yellow-color-8);
+
+    --hx-danger-color-1: #FF6387;
+    --hx-danger-color-2: #FF295B;
+    --hx-danger-color-3: #D90033;
+    --hx-danger-color-4: #990024;
+    --hx-danger-color-5: #660018;
+
+    /* 上涨色 */
+    --hx-raise-color-1: var(--hx-sec-brand-color-1);
+    --hx-raise-color-2: var(--hx-sec-brand-color-2);
+    --hx-raise-color-3: var(--hx-sec-brand-color-3);
+    --hx-raise-color-4: var(--hx-sec-brand-color-4);
+    --hx-raise-color-5: var(--hx-sec-brand-color-5);
+
+    /* 下跌色 */
+    --hx-fall-color-1: var(--green-color-4);
+    --hx-fall-color-2: var(--green-color-5);
+    --hx-fall-color-3: var(--green-color-6);
+    --hx-fall-color-4: var(--green-color-7);
+    --hx-fall-color-5: var(--green-color-8);
+
+    /* 持平色 */
+    --hx-equal-color-1: var(--hx-gray-color-3);
+
+    /* 文字和图标颜色 */
+    --hx-font-color-1: var(--hx-gray-color-11);
+    --hx-font-color-2: var(--hx-gray-color-10);
+    --hx-font-color-3: var(--hx-gray-color-9);
+    --hx-font-color-4: var(--hx-gray-color-8);
+    --hx-font-color-5: var(--hx-gray-color-6);
+    --hx-font-color-6: #F0F888;
+    --hx-font-color-7: #04E2F4;
+
+    /* 文本颜色 */
+    --hx-text-color-primary: #EEEFF0;
+    --hx-text-color-secondary: #b4b6b8;
+    --hx-text-color-tertiary: #63656C;
+    --hx-text-color-quaternary: #63656C;
+    --hx-text-color-fifth: #63656C;
+    --hx-text-color-code: #F0BE83;
+    --hx-text-color-emphasize: #19A0FF;
+
+    /* 状态色扩展 */
+    --hx-raise-color-normal: var(--hx-raise-color-3);
+    --hx-raise-color-hover: var(--hx-raise-color-2);
+    --hx-raise-color-focus: var(--hx-raise-color-5);
+    --hx-raise-color-active: var(--hx-raise-color-5);
+    --hx-raise-color-disable: var(--hx-raise-color-5);
+
+    --hx-fall-color-normal: var(--hx-fall-color-3);
+    --hx-fall-color-hover: var(--hx-fall-color-2);
+    --hx-fall-color-focus: var(--hx-fall-color-5);
+    --hx-fall-color-active: var(--hx-fall-color-5);
+    --hx-fall-color-disable: var(--hx-fall-color-5);
+
+    --hx-success-color-normal: var(--hx-success-color-3);
+    --hx-success-color-hover: var(--hx-success-color-2);
+    --hx-success-color-active: var(--hx-success-color-4);
+    --hx-success-color-disabled: var(--hx-success-color-5);
+
+    /* 基础颜色状态扩展 */
+    --hx-brand-color-hover: var(--hx-brand-color-2);
+    --hx-brand-color-focus: var(--hx-brand-color-2);
+    --hx-brand-color-active: var(--hx-brand-color-4);
+    --hx-brand-color-disabled: var(--hx-brand-color-3);
+    --hx-brand-color-light: var(--hx-brand-color-1);
+    --hx-brand-color-light-hover: var(--hx-brand-color-2);
+
+    /* 警告色扩展 */
+    --hx-warning-color-hover: var(--hx-warning-color-2);
+    --hx-warning-color-focus: var(--hx-warning-color-2);
+    --hx-warning-color-active: var(--hx-warning-color-4);
+    --hx-warning-color-disabled: var(--hx-warning-color-3);
+    --hx-warning-color-light: var(--hx-warning-color-1);
+    --hx-warning-color-light-hover: var(--hx-warning-color-2);
+
+    /* 背景色 */
+    --hx-bg-color-page: #111219;
+    --hx-bg-color-container: #171922;
+    --hx-bg-color-specialcomponent: #212433;
+
+    /* 边框色 */
+    --hx-border-level-1-color: #212433;
+    --hx-border-level-2-color: #3A3F55;
+    --hx-border-level-3-color: #1482CC;
+    --hx-border-level-4-color: #19A0FF;
+    --hx-border-level-5-color: #323337;
+    --hx-component-border: #323337;
+
+    /* 滚动条色 */
+    --hx-scrollbar-color: rgba(33, 36, 51);
+    --hx-scrollbar-hover-color: rgba(40, 44, 60);
+    --hx-scroll-track-color: #212433;
+    
+    /* 字体相关 token */
+    --hx-font-family: "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --hx-font-size-body-medium: 14px;
+    --hx-line-height-body-medium: 22px;
+    
+    /* 圆角相关 */
+    --hx-radius-small: 2px;
+    --hx-radius-default: 3px;
+    --hx-radius-medium: 6px;
+    
+    /* 基础尺寸 */
+    --hx-size-4: 8px;
+    --hx-size-5: 12px;
+    --hx-size-6: 16px;
+    
+    /* 原tailwind变量保持不变 */
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
@@ -33,11 +248,30 @@
   
   html, body {
     @apply antialiased;
-    font-family: "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: var(--hx-font-family);
   }
 
   body {
     @apply bg-market-background text-foreground;
+  }
+  
+  /* 滚动条样式 */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--hx-scroll-track-color);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--hx-scrollbar-color);
+    border-radius: var(--hx-radius-small);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--hx-scrollbar-hover-color);
   }
 }
 

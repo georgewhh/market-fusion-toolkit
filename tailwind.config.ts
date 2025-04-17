@@ -54,14 +54,19 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				market: {
-					red: '#D83C3C',
-					green: '#0F9948',
-					yellow: '#F0BE83',
-					blue: '#3F7DFC',
+					red: 'var(--hx-raise-color-3)',
+					green: 'var(--hx-fall-color-3)',
+					yellow: 'var(--hx-warning-color-3)',
+					blue: 'var(--hx-brand-color-3)',
 					purple: '#8E44AD',
-					background: '#111219',
-					card: '#1E1F2B',
-					border: '#2A2C3C'
+					background: 'var(--hx-bg-color-page)',
+					card: 'var(--hx-bg-color-container)',
+					border: 'var(--hx-border-level-2-color)',
+					text: {
+						primary: 'var(--hx-text-color-primary)',
+						secondary: 'var(--hx-text-color-secondary)',
+						tertiary: 'var(--hx-text-color-tertiary)'
+					}
 				}
 			},
 			borderRadius: {
